@@ -59,27 +59,32 @@ class _LoginPageState extends State<LoginPage> {
                     ),
 
                     InkWell(
-                      onTap: () {
+                      onTap: () async {
                         setState(() {
-                          changeButton = true;                          
-                        });                        
-                        // Navigator.pushNamed(context, MyRoutes.homeRoute);
+                          changeButton = true;
+                        });
+
+                        await Future.delayed(Duration(seconds: 1));
+                        Navigator.pushNamed(context, MyRoutes.homeRoute);
                       },
                       child: AnimatedContainer(
                         duration: Duration(seconds: 1),
                         width: changeButton ? 50 : 150,
                         height: 50,
                         alignment: Alignment.center,
-                        child: Text(
-                          "Login",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
-                        ),
+                        child: changeButton
+                            ? Icon(Icons.done, color: Colors.white)  //Adds tick icon if clicked
+                            : Text(
+                                "Login",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              ),
                         decoration: BoxDecoration(
                             color: Colors.deepPurple,
-                            borderRadius: BorderRadius.circular(7)),
+                            borderRadius:
+                                BorderRadius.circular(changeButton ? 20 : 7)),
                       ),
                     ),
 
